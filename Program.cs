@@ -1,2 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿//================================================================
+// Copyright (c) Coalition of Good-Hearted Engineers
+// Advanced System for Text Analysis and AI-powered Categorization
+//================================================================
