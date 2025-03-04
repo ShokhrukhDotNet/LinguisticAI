@@ -26,31 +26,20 @@ class LinguisticAI
         Console.WriteLine("Matn kiriting:");
         string text = Console.ReadLine();
 
-        string[] words = Regex.Matches(text, @"\b[a-zA-Z]+\b")
-                              .Select(m => m.Value)
-                              .ToArray();
+        string[] words = Regex.Matches(text, @"\b[a-zA-Z]+\b").Select(m => m.Value).ToArray();
 
-        string[] numbers = Regex.Matches(text, @"\d+")
-                                .Select(m => m.Value)
-                                .ToArray();
+        string[] numbers = Regex.Matches(text, @"\d+").Select(m => m.Value).ToArray();
 
-        string[] specialChars = Regex.Matches(text, @"[^\w\s]")
-                                     .Select(m => m.Value)
-                                     .ToArray();
+        string[] specialChars = Regex.Matches(text, @"[^\w\s]").Select(m => m.Value).ToArray();
 
-        string[] formulas = Regex.Matches(text, @"[A-Za-z0-9\^\=\+\-\*/\(\)\|∫]+")
-                                 .Select(m => m.Value)
-                                 .Where(f => f.Contains("=") || f.Contains("∫") || f.Contains("|"))
-                                 .ToArray();
+        string[] formulas = Regex.Matches(text, @"[A-Za-z0-9\^\=\+\-\*/\(\)\|∫]+").Select(m => m.Value)
+                                 .Where(f => f.Contains("=") || f.Contains("∫") || f.Contains("|")).ToArray();
 
-        Dictionary<string, int> wordFrequency = words.GroupBy(w => w.ToLower())
-                                                     .ToDictionary(g => g.Key, g => g.Count());
+        Dictionary<string, int> wordFrequency = words.GroupBy(w => w.ToLower()).ToDictionary(g => g.Key, g => g.Count());
 
-        var mostFrequentWords = wordFrequency.OrderByDescending(kvp => kvp.Value)
-                                             .Take(5);
+        var mostFrequentWords = wordFrequency.OrderByDescending(kvp => kvp.Value).Take(5);
 
-        Dictionary<char, int> charFrequency = text.Where(c => !char.IsWhiteSpace(c))
-                                                  .GroupBy(c => c)
+        Dictionary<char, int> charFrequency = text.Where(c => !char.IsWhiteSpace(c)).GroupBy(c => c)
                                                   .ToDictionary(g => g.Key, g => g.Count());
 
         Console.WriteLine("So'zlar: " + string.Join(", ", words));
